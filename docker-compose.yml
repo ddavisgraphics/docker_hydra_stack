@@ -1,32 +1,31 @@
-version: '2'
+version: '2.1'
 services:
-  db:
-    image: mysql:5.6
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
-  redis:
-    image: redis
-    ports:
-      - "6379:6379"
-  fedora:
-    image: osul/fcrepo:4.6.0
-    ports:
-      - "8984:8080"
-  solr:
-      image: solr:5.5
-      ports:
-        - "8983:8983"
-      volumes:
-        - ./solr/config:/opt/config
-  app:
-    build: .
-    command: rails s -p 3000 -b '0.0.0.0'
-    volumes:
-      - .:/hydra-docker-demo
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-      - redis
-      - fedora
-      - solr
+        db:
+                image: mysql:5.7.16
+                environment:
+                        - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        redis:
+                image: redis
+                ports:
+                        - "6379:6379"
+        fedora:
+                image: cbeer/fcrepo4:4.6
+                ports:
+                        - "8984:8080"
+        solr:
+                image: solr:5.5
+                ports:
+                        - "8983:8983"
+                volumes:
+                        - ./solr/config:/opt/config
+        hydra:
+                image: djdaviswvu/rails:4.2.6
+                volumes:
+                        - ./hydra:/hydra
+                ports:
+                        - "3000:3000"
+                depends_on:
+                        - db
+                        - redis
+                        - fedora
+                        - solr

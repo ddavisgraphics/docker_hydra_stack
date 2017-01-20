@@ -12,7 +12,9 @@ Note this is for Hydra Version 10.0.0
   - `ruby:2.3.3` is the image we are using
   - `bash` opens a bash window for giving the commands used to generate the application
 
-- `rails 4.2.6 new hydra-demo`  This creates a rails 4.2.6 application named hydra-demo you can change this name to whatever it needs to be for the specific project. Ideally this would be a git repo that gets pulled into the hydra stack during development, but this way explains exactly how to create a new hydra head from the start.     
+- Install rails 4.2.6  `gem install rails -v 4.2.6`
+
+- `rails new hydra-demo --database=mysql --skip-bundle`  This creates a rails 4.2.6 application named hydra-demo you can change this name to whatever it needs to be for the specific project. Ideally this would be a git repo that gets pulled into the hydra stack during development, but this way explains exactly how to create a new hydra head from the start.     
 
 ### Run Hydra Specific Dependencies
 
@@ -20,6 +22,5 @@ Note this is for Hydra Version 10.0.0
 - run `bundle install` so that all hydra dependencies get installed
 - Run the hydra generator `rails generate hydra:install`
 
-### Be Sure Solr 6.x
-
--
+### Be Sure Solr 6.x and Fedora DB 4.x
+These are needed for hydra 10.  If moving hydra 7 items over from fedora 3 we will have to run some migration scripts or re-populate from MFCS.  Either would be okay.  
